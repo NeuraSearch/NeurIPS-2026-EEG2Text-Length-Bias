@@ -28,7 +28,7 @@ class EEG_dataset(Dataset):
 
 class EEG_dataset_whisper(Dataset):
     def __init__(self, path, subject="all", exclude_the_present=False, max_samples=None):
-        """EEG dataset for Brennan, NeuraSearch, and HBN
+        """EEG dataset for Brennan, and HBN
 
         Args:
             path (str): path to dataset
@@ -56,7 +56,7 @@ class EEG_dataset_whisper(Dataset):
                 subject = parts[1]
                 sent = filename.split("-sent-")[1].replace(".pickle", "")
                 return (subject, 0, int(sent))
-            elif "_trial-" in filename:  # NeuraSearch format
+            elif "_trial-" in filename:  # SeLis format
                 subject = parts[1].split("_")[0]
                 trial = filename.split("_trial-")[1].split("_")[0]
                 sent = filename.split("_sent-")[1].replace(".pickle", "")

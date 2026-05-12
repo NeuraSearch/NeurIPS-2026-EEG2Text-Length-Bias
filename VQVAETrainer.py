@@ -5,8 +5,6 @@ Trains the Mel-VQVAE (Vector Quantized Variational AutoEncoder) that learns
 to encode and reconstruct mel spectrograms. This is Stage 1 of BrainECHO pipeline.
 
 The trained VQVAE checkpoint is then used in Stages 2 & 3 for brain-audio alignment.
-
-Author: Iakovos Evdaimon
 """
 
 import os
@@ -239,7 +237,7 @@ class VQVAETrainer(TrainingInterface):
             print(f"       {label}: {tuple(m.shape)}  dtype={m.dtype}")
             return m
 
-        if dataset_name in ["brennan", "neurasearch", "hbn", "sparrkulee", "lpphk", "largespanisheeg"]:
+        if dataset_name in ["brennan", "selis", "hbn", "sparrkulee", "lpphk", "largespanisheeg"]:
             # All single datasets: just load from base_path/log_mel_features.pickle
             mel_path = os.path.join(base_path, "log_mel_features.pickle")
             print(f"[INFO] Loading {dataset_name.upper()} mel features from: {mel_path}")
@@ -251,7 +249,7 @@ class VQVAETrainer(TrainingInterface):
 
             dataset_paths = {
                 "Brennan": os.path.join(datasets_root, "Brennan", "log_mel_features.pickle"),
-                "NeuraSearch": os.path.join(datasets_root, "NeuraSearch", "log_mel_features.pickle"),
+                "selis": os.path.join(datasets_root, "selis", "log_mel_features.pickle"),
                 "HBN": os.path.join(datasets_root, "HBN", "log_mel_features.pickle"),
                 "SparrKULee": os.path.join(datasets_root, "SparrKuLee", "log_mel_features.pickle"),
                 "LPPHK": os.path.join(datasets_root, "LPPHK", "log_mel_features.pickle"),
@@ -265,7 +263,7 @@ class VQVAETrainer(TrainingInterface):
 
         else:
             raise ValueError(
-                "Unknown dataset. Use: brennan, neurasearch, hbn, sparrkulee, lpphk, largespanisheeg, or all_datasets"
+                "Unknown dataset. Use: brennan, selis, hbn, sparrkulee, lpphk, largespanisheeg, or all_datasets"
             )
 
         return log_mel_features

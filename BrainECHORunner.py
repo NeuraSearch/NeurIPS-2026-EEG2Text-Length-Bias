@@ -320,7 +320,7 @@ class BrainECHORunner(RunnerInterface):
     def _validate_config(self, cfg: DictConfig):
         """Validate required configuration parameters"""
         required_params = {
-            'dataset_name': 'Dataset name (e.g., brennan, hbn, neurasearch)',
+            'dataset_name': 'Dataset name (e.g., brennan, hbn)',
             'dataset_path': 'Path to dataset directory',
             'save_path':    'Path to save checkpoints',
             'checkpoint':   'Path to VQVAE checkpoint (Stage 1 output)',

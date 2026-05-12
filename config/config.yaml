@@ -2,7 +2,7 @@
 # Follows lab standard architecture with Hydra
 
 defaults:
-  - dataset: brennan  # Default dataset (override with dataset=brennan, neurasearch, sparrkulee, largespanisheeg, lpphk)
+  - dataset: brennan  # Default dataset (override with dataset=brennan, hbn)
   - _self_
 
 # Set random seed
