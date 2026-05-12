@@ -1,0 +1,3 @@
+# @package _global_
+log_dir: ./logs/logging/LPPHKdataset
+checkpoint: ./checkpoints/whisper_decoding/LPPHK_dataset/LPPHK_dataset-mel-vqvae-pretrain-400400-2e-4/MelVQVAE_b16_400_0.0002_autoencode.pt

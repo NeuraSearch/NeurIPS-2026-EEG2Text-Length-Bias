@@ -1,0 +1,7 @@
+# @package _global_
+# HBN dataset configuration
+# Healthy Brain Network movie dataset (136 subjects, 4 movies, 129 channels)
+
+log_dir: ./logs/logging/HBNdataset
+
+checkpoint: ./checkpoints/whisper_decoding/HBN_dataset/HBN_dataset-mel-vqvae-pretrain-400400-2e-4/MelVQVAE_b16_400_0.0002_autoencode.pt

@@ -1,0 +1,112 @@
+# BrainECHO Base Configuration
+# Follows lab standard architecture with Hydra
+
+defaults:
+  - dataset: brennan  # Default dataset (override with dataset=brennan, neurasearch, sparrkulee, largespanisheeg, lpphk)
+  - _self_
+
+# Set random seed
+seed: 312
+
+# ============================================================================
+# MODEL SELECTION
+# ============================================================================
+
+# Which model to train:
+#   brainecho       - Full BrainECHO pipeline (Stages 1-3)
+#   neuraspeech     - NeuSpeech baseline (Whisper + EEG projection, single stage)
+#   braintranslator - BrainTranslator baseline (BART + conv frontend, single stage)
+#
+# Trivial baselines (no training needed, controlled by eval flags):
+#   eval_random_select: true  → random sentence selection baseline
+#   eval_input_noise: true    → Gaussian noise input baseline
+model_type: brainecho
+
+# ============================================================================
+# STAGE SELECTION
+# ============================================================================
+
+# Which stages to run: [1], [2, 3], or [1, 2, 3]
+# Note: neuraspeech and braintranslator ignore Stage 1 automatically
+stages_to_run: [1, 2, 3]
+
+# ============================================================================
+# GENERAL PARAMETERS
+# ============================================================================
+
+dataset_name: ???  # Must match dataset config
+dataset_path: ???  # Path to dataset directory
+save_path: ???     # Path to save checkpoints
+
+root_directory: null
+subject: all
+split_mel: false
+split_len: 4
+latent_loss: mse
+cb_size: 2048
+ratio: 4
+
+# HBN-specific parameters
+exclude_the_present_stage3: false
+max_samples: null
+
+# ============================================================================
+# STAGE 1 PARAMETERS (Mel-VQVAE Pretraining — BrainECHO only)
+# ============================================================================
+
+vqvae_dataset: brennan
+vqvae_save_path: null
+vqvae_num_epochs: 400
+vqvae_lr: 2e-4
+vqvae_batch_size: 16
+vqvae_T_max: 400
+
+# ============================================================================
+# STAGES 2 & 3 PARAMETERS
+# ============================================================================
+
+model_name: BrainECHO
+
+num_epoch_finetune: [40, 40]  # [Stage 2 epochs, Stage 3 epochs]
+                               # For baselines, only the last value is used
+T_max: [40, 40]
+lr_finetune: [1e-4, 1e-4]
+batch_size: [16, 16]
+
+finetune_optimizer: adamw
+task_name: eeg2text
+state: INFO
+cuda: cpu
+
+log_dir: ???
+checkpoint: ???  # VQVAE checkpoint path (required for brainecho only)
+
+# Hydra configuration
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  job:
+    name: brainecho_training
+    chdir: false
+
+# ============================================================================
+# EVALUATION PARAMETERS
+# ============================================================================
+
+run_evaluation: false
+eval_checkpoint: null
+eval_results_name: evaluation_results
+eval_output_dir: ./result
+
+# Evaluation modes
+eval_teacher_forcing: false   # BrainECHO only
+eval_input_noise: false       # Gaussian noise baseline
+eval_random_select: false     # Random sentence baseline
+eval_without_finetuning: false  # BrainECHO only
+eval_length_noise: false      # Length-preserving noise baseline
+
+# HBN-specific evaluation
+exclude_the_present_eval: false
+eval_max_samples: null
+
+save_results: false

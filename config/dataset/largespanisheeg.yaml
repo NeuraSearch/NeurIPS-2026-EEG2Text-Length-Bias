@@ -1,0 +1,3 @@
+# @package _global_
+log_dir: ./logs/logging/largespanisheeg
+checkpoint: ./checkpoints/whisper_decoding/LargeSpanishEEG_dataset/MelVQVAE_b16_400_0.0002_autoencode.pt

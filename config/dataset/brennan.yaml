@@ -1,0 +1,7 @@
+# @package _global_
+# Brennan dataset configuration
+# Alice in Wonderland dataset (49 subjects, 140 sentences, 62 channels)
+
+log_dir: ./logs/logging/Brennandataset
+
+checkpoint: ./checkpoints/whisper_decoding/Brennan_dataset/Brennan_dataset-mel-vqvae-pretrain-400400-2e-4/MelVQVAE_b16_400_0.0002_autoencode.pt

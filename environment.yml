@@ -1,0 +1,39 @@
+name: BrainEchoRep3.10
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch-cuda=12.1
+  - pytorch=2.5.1
+  - torchaudio=2.5.1
+  - cudnn=8.9.2
+  - av
+  - ffmpeg
+  - pip
+  - pip:
+    - einops==0.8.0
+    - ipython==8.12.3
+    - jsonlines==4.0.0
+    - librosa==0.10.2.post1
+    - mne==1.7.1
+    - numpy==2.0.1
+    - pandas==2.2.2
+    - peft==0.11.1
+    - PyYAML==6.0.2
+    - scikit-learn==1.4.2
+    - scipy==1.14.0
+    - soundfile==0.12.1
+    - torchmetrics==1.4.0.post0
+    - tqdm==4.66.4
+    - transformers==4.40.0
+    - wandb==0.17.6
+    - captum
+    - whisperx
+    - eeglabio
+    - yt-dlp
+    - hydra-core
+    - openpyxl
+    - linear-attention-transformer
